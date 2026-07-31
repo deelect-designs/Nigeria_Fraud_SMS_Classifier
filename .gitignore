@@ -11,7 +11,8 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Models
-models/*.pkl
+models/X_tfidf.pkl
+models/y.pkl
 models/*.joblib
 
 # Environment
