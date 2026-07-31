@@ -1,7 +1,7 @@
 /* ==========================================================
-   FRAUD SMS CLASSIFIER
-   Professional MVP Stylesheet
-   Part 1
+   NIGERIA FRAUD SMS CLASSIFIER
+   AI-powered SMS fraud detection for Nigeria. Protect yourself from phishing, fake bank alerts, lottery scams, POS scams, and other fraudulent SMS messages.
+
 ========================================================== */
 
 /* ===========================
@@ -1927,5 +1927,59 @@ tbody td{
         flex:1;
 
     }
+
+}/* ==========================================
+   Nigerian Sample Messages
+========================================== */
+
+.sample-messages{
+
+    margin-top:25px;
+
+}
+
+.sample-messages h3{
+
+    margin-bottom:15px;
+
+    color:#008753;
+
+}
+
+.sample-buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.sample-btn{
+
+    background:#ffffff;
+
+    border:2px solid #008753;
+
+    color:#008753;
+
+    padding:10px 16px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.sample-btn:hover{
+
+    background:#008753;
+
+    color:#ffffff;
 
 }

@@ -9,17 +9,18 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="AI-powered Fraud SMS Classifier using Machine Learning">
+          content="AI-powered SMS fraud detection system designed to help Nigerians identify phishing, fake bank alerts, lottery scams, BVN scams and other fraudulent SMS messages.">
 
     <meta name="keywords"
-          content="Spam Detection, SMS Classifier, AI, Machine Learning, Fraud Detection">
+          content="Nigeria SMS fraud, phishing detection, scam detection, BVN scam, fake bank alert, POS scam, AI, Machine Learning, cybersecurity">
 
     <meta name="author"
           content="Daniel Ogbodo">
 
-    <title>Fraud SMS Classifier | AI Spam Detection</title>
+    <title>Naija SMS Shield | AI-Powered SMS Fraud Detection for Nigeria</title>
 
     <!-- Google Fonts -->
+
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -31,10 +32,12 @@
           rel="stylesheet">
 
     <!-- Font Awesome -->
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- CSS -->
+    <!-- Main CSS -->
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 
@@ -42,336 +45,454 @@
 
 <body>
 
-    <!-- ========================= -->
-    <!-- Navigation -->
-    <!-- ========================= -->
+<!-- ========================================= -->
+<!-- Navigation -->
+<!-- ========================================= -->
 
-    <nav class="navbar">
+<nav class="navbar">
 
-        <div class="container nav-container">
+    <div class="container nav-container">
 
-            <div class="logo">
+        <div class="logo">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <span>Naija SMS Shield</span>
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#home">Home</a>
+
+            <a href="#analyze">Analyze SMS</a>
+
+            <a href="#about">About</a>
+
+            <a href="#dashboard">Dashboard</a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ========================================= -->
+<!-- Hero Section -->
+<!-- ========================================= -->
+
+<section class="hero"
+         id="home">
+
+    <div class="container hero-content">
+
+        <h1>
+
+            AI-Powered
+
+            <span>SMS Fraud Detection for Nigeria</span>
+
+        </h1>
+
+        <p>
+
+            Protect yourself from fake bank alerts,
+            BVN scams, POS scams, phishing attacks,
+            fake investment offers, lottery scams and
+            other fraudulent SMS messages commonly
+            targeting Nigerians.
+
+        </p>
+
+        <div class="hero-badges">
+
+            <div class="badge">
+
+                <i class="fa-solid fa-brain"></i>
+
+                AI Detection
+
+            </div>
+
+            <div class="badge">
 
                 <i class="fa-solid fa-shield-halved"></i>
 
-                <span>Fraud SMS Classifier</span>
+                Secure Analysis
 
             </div>
 
-            <div class="nav-links">
+            <div class="badge">
 
-                <a href="#home">Home</a>
+                <i class="fa-solid fa-bolt"></i>
 
-                <a href="#analyze">Analyze</a>
+                Instant Results
 
-                <a href="#about">About</a>
+            </div>
+
+            <div class="badge">
+
+                <i class="fa-solid fa-flag"></i>
+
+                Built for Nigeria
 
             </div>
 
         </div>
 
-    </nav>
+    </div>
 
-    <!-- ========================= -->
-    <!-- Hero Section -->
-    <!-- ========================= -->
+</section><!-- ========================================= -->
+<!-- Analyzer Section -->
+<!-- ========================================= -->
 
-    <section class="hero"
-             id="home">
+<section class="analyzer"
+         id="analyze">
 
-        <div class="container hero-content">
+    <div class="container">
 
-            <h1>
-                AI-Powered
-                <span>Fraud SMS Detection</span>
-            </h1>
+        <div class="card">
 
-            <p>
+            <h2>
 
-                Detect fraudulent SMS messages instantly using
-                Natural Language Processing (NLP) and
-                Machine Learning.
+                Analyze an SMS Message
+
+            </h2>
+
+            <p class="subtitle">
+
+                Paste any SMS message below and let our AI determine
+                whether it is Safe or Fraudulent.
 
             </p>
 
-            <div class="hero-badges">
+            <!-- ========================= -->
+            <!-- SMS Form -->
+            <!-- ========================= -->
 
-                <div class="badge">
+            <form id="smsForm">
 
-                    <i class="fa-solid fa-brain"></i>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="8"
+                    maxlength="2000"
+                    placeholder="Paste an SMS message here..."
+                    required></textarea>
 
-                    AI Detection
+                <!-- Nigerian Sample Messages -->
 
-                </div>
+                <div class="sample-messages">
 
-                <div class="badge">
+                    <h3>
 
-                    <i class="fa-solid fa-shield"></i>
+                        🇳🇬 Try Nigerian Scam Examples
 
-                    Secure Analysis
+                    </h3>
 
-                </div>
-
-                <div class="badge">
-
-                    <i class="fa-solid fa-bolt"></i>
-
-                    Instant Results
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ========================= -->
-    <!-- Analyzer -->
-    <!-- ========================= -->
-
-    <section class="analyzer"
-             id="analyze">
-
-        <div class="container">
-
-            <div class="card">
-
-                <h2>
-
-                    Analyze an SMS Message
-
-                </h2>
-
-                <p class="subtitle">
-
-                    Paste any SMS below and let the AI determine
-                    whether it is Safe or Spam.
-
-                </p>
-
-                <form id="smsForm">
-
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="8"
-                        maxlength="2000"
-                        placeholder="Example:
-
-Congratulations! Your ATM card has been selected to receive ₦500,000.
-
-Click the link below to claim your reward immediately."
-
-                        required></textarea>
-
-                    <div class="button-group">
+                    <div class="sample-buttons">
 
                         <button
-                            type="submit"
-                            class="predict-btn">
+                            type="button"
+                            class="sample-btn"
+                            data-message="Dear Customer, your GTBank account has been suspended. Click https://gt-secure-update.com immediately to reactivate.">
 
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            Analyze SMS
+                            Fake Bank Alert
 
                         </button>
 
                         <button
-                            type="reset"
-                            class="clear-btn"
-                            id="clearBtn">
+                            type="button"
+                            class="sample-btn"
+                            data-message="Your BVN will expire today. Verify immediately to avoid account restriction.">
 
-                            <i class="fa-solid fa-trash"></i>
+                            BVN Scam
 
-                            Clear
+                        </button>
+
+                        <button
+                            type="button"
+                            class="sample-btn"
+                            data-message="Congratulations! You have won ₦5,000,000. Send your account details immediately to receive your prize.">
+
+                            Lottery Scam
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="sample-btn"
+                            data-message="₦120,000 was mistakenly transferred into your account. Kindly refund immediately.">
+
+                            POS Scam
 
                         </button>
 
                     </div>
 
-                </form>
+                </div>
 
-                <!-- Loading -->
+                <!-- Buttons -->
 
-                <div
-                    id="loading"
-                    class="loading hidden">
+                <div class="button-group">
 
-                    <div class="spinner"></div>
+                    <button
+                        type="submit"
+                        class="predict-btn">
 
-                    <p>
+                        <i class="fa-solid fa-magnifying-glass"></i>
 
-                        AI is analyzing your SMS...
+                        Analyze SMS
 
-                    </p>
+                    </button>
 
-                </div>                <!-- ========================= -->
-                <!-- Results Card -->
-                <!-- ========================= -->
+                    <button
+                        type="reset"
+                        class="clear-btn"
+                        id="clearBtn">
 
-                <div id="resultCard" class="result-card hidden">
+                        <i class="fa-solid fa-trash"></i>
 
-                    <div class="result-header">
+                        Clear
 
-                        <h2>Analysis Result</h2>
+                    </button>
 
-                        <span id="predictionBadge"
-                              class="prediction-badge">
-                            Waiting...
+                </div>
+
+            </form>
+
+            <!-- ========================= -->
+            <!-- Loading -->
+            <!-- ========================= -->
+
+            <div
+                id="loading"
+                class="loading hidden">
+
+                <div class="spinner"></div>
+
+                <p>
+
+                    AI is analyzing your SMS...
+
+                </p>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- Results Card -->
+            <!-- ========================= -->
+
+            <div
+                id="resultCard"
+                class="result-card hidden">
+
+                <div class="result-header">
+
+                    <h2>
+
+                        Analysis Result
+
+                    </h2>
+
+                    <span
+                        id="predictionBadge"
+                        class="prediction-badge">
+
+                        Waiting...
+
+                    </span>
+
+                </div>
+
+                <!-- Summary -->
+
+                <div class="result-grid">
+
+                    <div class="result-box">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <h4>Confidence</h4>
+
+                        <h3 id="confidence">
+
+                            0%
+
+                        </h3>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        <h4>Spam Probability</h4>
+
+                        <h3 id="spamProbability">
+
+                            0%
+
+                        </h3>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <i class="fa-solid fa-shield-check"></i>
+
+                        <h4>Safe Probability</h4>
+
+                        <h3 id="hamProbability">
+
+                            0%
+
+                        </h3>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                        <h4>Risk Level</h4>
+
+                        <h3 id="riskLevel">
+
+                            Low
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <!-- Probability Bars -->
+
+                <div class="progress-section">
+
+                    <div class="progress-item">
+
+                        <label>
+
+                            Spam Score
+
+                            <span id="spamPercent">
+
+                                0%
+
+                            </span>
+
+                        </label>
+
+                        <div class="progress">
+
+                            <div
+                                id="spamBar"
+                                class="progress-fill spam-fill"
+                                style="width:0%;">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="progress-item">
+
+                        <label>
+
+                            Safe Score
+
+                            <span id="hamPercent">
+
+                                0%
+
+                            </span>
+
+                        </label>
+
+                        <div class="progress">
+
+                            <div
+                                id="hamBar"
+                                class="progress-fill ham-fill"
+                                style="width:0%;">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Keywords -->
+
+                <div class="keywords-section">
+
+                    <h3>
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Suspicious Keywords
+
+                    </h3>
+
+                    <div
+                        id="keywordsContainer"
+                        class="keywords-container">
+
+                        <span class="keyword">
+
+                            None Detected
+
                         </span>
 
                     </div>
 
-                    <div class="result-grid">
+                </div>
 
-                        <div class="result-box">
+                <!-- Original Message -->
 
-                            <i class="fa-solid fa-chart-line"></i>
+                <div class="message-preview">
 
-                            <h4>Confidence</h4>
+                    <h3>
 
-                            <h3 id="confidence">
-                                0%
-                            </h3>
+                        <i class="fa-solid fa-envelope-open-text"></i>
 
-                        </div>
+                        Message Preview
 
-                        <div class="result-box">
+                    </h3>
 
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-
-                            <h4>Spam Probability</h4>
-
-                            <h3 id="spamProbability">
-                                0%
-                            </h3>
-
-                        </div>
-
-                        <div class="result-box">
-
-                            <i class="fa-solid fa-shield-check"></i>
-
-                            <h4>Safe Probability</h4>
-
-                            <h3 id="hamProbability">
-                                0%
-                            </h3>
-
-                        </div>
-
-                        <div class="result-box">
-
-                            <i class="fa-solid fa-gauge-high"></i>
-
-                            <h4>Risk Level</h4>
-
-                            <h3 id="riskLevel">
-                                Low
-                            </h3>
-
-                        </div>
+                    <div
+                        id="originalMessage"
+                        class="preview-box">
 
                     </div>
 
-                    <!-- Progress Bars -->
+                </div>
 
-                    <div class="progress-section">
+                <!-- ========================= -->
+                <!-- Recommended Action -->
+                <!-- ========================= -->
 
-                        <div class="progress-item">
+                <div class="recommendation-card">
 
-                            <label>
+                    <h3>
 
-                                Spam Score
+                        <i class="fa-solid fa-shield-heart"></i>
 
-                                <span id="spamPercent">
-                                    0%
-                                </span>
+                        Recommended Action
 
-                            </label>
+                    </h3>
 
-                            <div class="progress">
+                    <p id="recommendationText">
 
-                                <div id="spamBar"
-                                     class="progress-fill spam-fill"
-                                     style="width:0%;">
+                        Analyze an SMS message to receive personalized
+                        security advice.
 
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="progress-item">
-
-                            <label>
-
-                                Safe Score
-
-                                <span id="hamPercent">
-                                    0%
-                                </span>
-
-                            </label>
-
-                            <div class="progress">
-
-                                <div id="hamBar"
-                                     class="progress-fill ham-fill"
-                                     style="width:0%;">
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Keywords -->
-
-                    <div class="keywords-section">
-
-                        <h3>
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            Suspicious Keywords
-
-                        </h3>
-
-                        <div id="keywordsContainer"
-                             class="keywords-container">
-
-                            <span class="keyword">
-
-                                None Detected
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Original Message -->
-
-                    <div class="message-preview">
-
-                        <h3>
-
-                            <i class="fa-solid fa-envelope-open-text"></i>
-
-                            Message Preview
-
-                        </h3>
-
-                        <div id="originalMessage"
-                             class="preview-box">
-
-                        </div>
-
-                    </div>
+                    </p>
 
                 </div>
 
@@ -379,228 +500,461 @@ Click the link below to claim your reward immediately."
 
         </div>
 
-    </section>    <!-- ========================= -->
-    <!-- Features Section -->
-    <!-- ========================= -->
+    </div>
 
-    <section class="features" id="about">
+</section><!-- ========================================= -->
+<!-- Features -->
+<!-- ========================================= -->
 
-        <div class="container">
+<section class="features"
+         id="about">
 
-            <div class="section-title">
+    <div class="container">
 
-                <h2>Why Use This Classifier?</h2>
+        <div class="section-title">
+
+            <h2>
+
+                Why Choose Naija SMS Shield?
+
+            </h2>
+
+            <p>
+
+                Built specifically to help Nigerians identify fraudulent
+                SMS messages using Artificial Intelligence, Natural
+                Language Processing and Machine Learning.
+
+            </p>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-brain"></i>
+
+                <h3>
+
+                    AI Powered
+
+                </h3>
 
                 <p>
-                    Our AI model combines Natural Language Processing (NLP)
-                    and Machine Learning to identify fraudulent SMS messages
-                    with high accuracy.
+
+                    Uses Natural Language Processing and Machine
+                    Learning to classify SMS messages with
+                    high accuracy.
+
                 </p>
 
             </div>
 
-            <div class="feature-grid">
+            <div class="feature-card">
 
-                <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
 
-                    <i class="fa-solid fa-robot"></i>
+                <h3>
 
-                    <h3>AI Powered</h3>
+                    Fraud Detection
 
-                    <p>
-                        Uses TF-IDF feature engineering and supervised
-                        machine learning to classify SMS messages.
-                    </p>
+                </h3>
 
-                </div>
+                <p>
 
-                <div class="feature-card">
+                    Detects fake bank alerts, phishing links,
+                    lottery scams, POS scams, investment scams
+                    and other suspicious SMS messages.
 
-                    <i class="fa-solid fa-shield-halved"></i>
+                </p>
 
-                    <h3>Fraud Detection</h3>
+            </div>
 
-                    <p>
-                        Detects phishing attempts, fake bank alerts,
-                        lottery scams and other suspicious SMS messages.
-                    </p>
+            <div class="feature-card">
 
-                </div>
+                <i class="fa-solid fa-bolt"></i>
 
-                <div class="feature-card">
+                <h3>
 
-                    <i class="fa-solid fa-gauge-high"></i>
+                    Instant Results
 
-                    <h3>Instant Analysis</h3>
+                </h3>
 
-                    <p>
-                        Returns predictions, confidence scores,
-                        probabilities and risk levels in seconds.
-                    </p>
+                <p>
 
-                </div>
+                    Receive predictions, confidence scores,
+                    risk levels and probability scores
+                    within seconds.
 
-                <div class="feature-card">
+                </p>
 
-                    <i class="fa-solid fa-key"></i>
+            </div>
 
-                    <h3>Keyword Detection</h3>
+            <div class="feature-card">
 
-                    <p>
-                        Highlights suspicious words commonly found
-                        in fraudulent SMS messages.
-                    </p>
+                <i class="fa-solid fa-key"></i>
 
-                </div>
+                <h3>
+
+                    Keyword Detection
+
+                </h3>
+
+                <p>
+
+                    Highlights suspicious words and phrases
+                    commonly found in fraudulent SMS messages.
+
+                </p>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-    <!-- ========================= -->
-    <!-- How It Works -->
-    <!-- ========================= -->
+</section>
 
-    <section class="workflow">
+<!-- ========================================= -->
+<!-- Nigeria Awareness -->
+<!-- ========================================= -->
 
-        <div class="container">
+<section class="awareness">
 
-            <div class="section-title">
+    <div class="container">
 
-                <h2>How It Works</h2>
+        <div class="section-title">
+
+            <h2>
+
+                Common SMS Scams in Nigeria
+
+            </h2>
+
+            <p>
+
+                Our AI is designed to recognize patterns
+                commonly used by fraudsters targeting Nigerians.
+
+            </p>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                <h3>
+
+                    Fake Bank Alerts
+
+                </h3>
+
+                <p>
+
+                    Messages pretending to come from
+                    GTBank, Access Bank, UBA,
+                    First Bank, Zenith Bank and others.
+
+                </p>
 
             </div>
 
-            <div class="steps">
+            <div class="feature-card">
 
-                <div class="step">
+                <i class="fa-solid fa-id-card"></i>
 
-                    <div class="step-number">
+                <h3>
 
-                        1
+                    BVN & NIN Scams
 
-                    </div>
+                </h3>
 
-                    <h3>Paste SMS</h3>
+                <p>
 
-                    <p>
-                        Paste any SMS message into the text box.
-                    </p>
+                    Fake verification requests asking
+                    for personal information or payment.
 
-                </div>
+                </p>
 
-                <div class="step">
+            </div>
 
-                    <div class="step-number">
+            <div class="feature-card">
 
-                        2
+                <i class="fa-solid fa-money-bill-wave"></i>
 
-                    </div>
+                <h3>
 
-                    <h3>AI Processing</h3>
+                    Lottery & Prize Scams
 
-                    <p>
-                        The text is cleaned, transformed using TF-IDF
-                        and analyzed by the trained machine learning model.
-                    </p>
+                </h3>
 
-                </div>
+                <p>
 
-                <div class="step">
+                    Messages claiming you've won
+                    money and requesting processing fees.
 
-                    <div class="step-number">
+                </p>
 
-                        3
+            </div>
 
-                    </div>
+            <div class="feature-card">
 
-                    <h3>Prediction</h3>
+                <i class="fa-solid fa-mobile-screen-button"></i>
 
-                    <p>
-                        Receive a prediction with confidence score,
-                        spam probability, safe probability,
-                        risk level and detected keywords.
-                    </p>
+                <h3>
 
-                </div>
+                    POS & Transfer Fraud
+
+                </h3>
+
+                <p>
+
+                    Fake transfer notifications
+                    asking victims to return money.
+
+                </p>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-    <!-- ========================= -->
-    <!-- Technology Stack -->
-    <!-- ========================= -->
+</section>
 
-    <section class="tech-stack">
+<!-- ========================================= -->
+<!-- How It Works -->
+<!-- ========================================= -->
 
-        <div class="container">
+<section class="workflow">
 
-            <div class="section-title">
+    <div class="container">
 
-                <h2>Technology Stack</h2>
+        <div class="section-title">
+
+            <h2>
+
+                How It Works
+
+            </h2>
+
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+
+                    1
+
+                </div>
+
+                <h3>
+
+                    Paste SMS
+
+                </h3>
+
+                <p>
+
+                    Paste or type any SMS message
+                    into the analyzer.
+
+                </p>
 
             </div>
 
-            <div class="tech-grid">
+            <div class="step">
 
-                <div class="tech-card">
+                <div class="step-number">
 
-                    <i class="fa-brands fa-python"></i>
-
-                    <span>Python</span>
+                    2
 
                 </div>
 
-                <div class="tech-card">
+                <h3>
 
-                    <i class="fa-solid fa-brain"></i>
+                    AI Analysis
 
-                    <span>Scikit-learn</span>
+                </h3>
 
-                </div>
+                <p>
 
-                <div class="tech-card">
+                    The message is cleaned,
+                    converted into numerical features
+                    using TF-IDF and analyzed by
+                    the trained machine learning model.
 
-                    <i class="fa-solid fa-server"></i>
+                </p>
 
-                    <span>Flask</span>
+            </div>
 
-                </div>
+            <div class="step">
 
-                <div class="tech-card">
+                <div class="step-number">
 
-                    <i class="fa-brands fa-html5"></i>
-
-                    <span>HTML5</span>
-
-                </div>
-
-                <div class="tech-card">
-
-                    <i class="fa-brands fa-css3-alt"></i>
-
-                    <span>CSS3</span>
+                    3
 
                 </div>
 
-                <div class="tech-card">
+                <h3>
 
-                    <i class="fa-brands fa-js"></i>
+                    Get Results
 
-                    <span>JavaScript</span>
+                </h3>
 
-                </div>
+                <p>
+
+                    View the prediction,
+                    confidence score,
+                    spam probability,
+                    risk level,
+                    suspicious keywords
+                    and security recommendation.
+
+                </p>
 
             </div>
 
         </div>
 
-    </section><!-- ===================================== -->
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Technology -->
+<!-- ========================================= -->
+
+<section class="tech-stack">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Technology Stack
+
+            </h2>
+
+            <p>
+
+                Technologies used to build
+                Naija SMS Shield.
+
+            </p>
+
+        </div>
+
+        <div class="tech-grid">
+
+            <div class="tech-card">
+
+                <i class="fa-brands fa-python"></i>
+
+                <span>
+
+                    Python
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-solid fa-brain"></i>
+
+                <span>
+
+                    Scikit-learn
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-solid fa-server"></i>
+
+                <span>
+
+                    Flask
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-brands fa-html5"></i>
+
+                <span>
+
+                    HTML5
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-brands fa-css3-alt"></i>
+
+                <span>
+
+                    CSS3
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-brands fa-js"></i>
+
+                <span>
+
+                    JavaScript
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-solid fa-database"></i>
+
+                <span>
+
+                    SQLite
+
+                </span>
+
+            </div>
+
+            <div class="tech-card">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>
+
+                    TF-IDF
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- ===================================== -->
 <!-- Analytics Dashboard -->
 <!-- ===================================== -->
 
@@ -612,26 +966,26 @@ Click the link below to claim your reward immediately."
 
             <h2>
 
-                Analytics Dashboard
+                SMS Detection Dashboard
 
             </h2>
 
             <p>
 
-                Live statistics generated from all analyzed SMS messages.
+                Live statistics generated from all SMS messages analyzed by
+                Naija SMS Shield.
 
             </p>
 
         </div>
 
-
-        <!-- Statistics Cards -->
+        <!-- Statistics -->
 
         <div class="stats-grid">
 
             <div class="stat-card">
 
-                <i class="fa-solid fa-database"></i>
+                <i class="fa-solid fa-envelope-circle-check"></i>
 
                 <h3 id="totalSMS">
 
@@ -641,12 +995,11 @@ Click the link below to claim your reward immediately."
 
                 <p>
 
-                    Total Messages
+                    Messages Analyzed
 
                 </p>
 
             </div>
-
 
             <div class="stat-card">
 
@@ -660,12 +1013,11 @@ Click the link below to claim your reward immediately."
 
                 <p>
 
-                    Spam Messages
+                    Fraud Detected
 
                 </p>
 
             </div>
-
 
             <div class="stat-card">
 
@@ -687,46 +1039,42 @@ Click the link below to claim your reward immediately."
 
         </div>
 
-
         <!-- Prediction History -->
 
         <div class="history-card">
 
-    <div class="history-header">
+            <div class="history-header">
 
-        <h3>
+                <h3>
 
-            Recent Predictions
+                    Recent Predictions
 
-        </h3>
+                </h3>
 
-        <div class="export-buttons">
+                <div class="export-buttons">
 
-            <a
-                href="/export/csv"
-                class="export-btn csv-btn"
-            >
+                    <a href="/export/csv"
+                       class="export-btn csv-btn">
 
-                <i class="fa-solid fa-file-csv"></i>
+                        <i class="fa-solid fa-file-csv"></i>
 
-                Export CSV
+                        Export CSV
 
-            </a>
+                    </a>
 
-            <a
-                href="/export/pdf"
-                class="export-btn pdf-btn"
-            >
+                    <a href="/export/pdf"
+                       class="export-btn pdf-btn">
 
-                <i class="fa-solid fa-file-pdf"></i>
+                        <i class="fa-solid fa-file-pdf"></i>
 
-                Export PDF
+                        Export PDF
 
-            </a>
+                    </a>
 
-        </div>
+                </div>
 
-    </div>
+            </div>
+
             <div class="table-container">
 
                 <table>
@@ -771,53 +1119,174 @@ Click the link below to claim your reward immediately."
 
 </section>
 
-    <!-- ========================= -->
-    <!-- Footer -->
-    <!-- ========================= -->
+<!-- ===================================== -->
+<!-- Nigeria Cybersecurity Tips -->
+<!-- ===================================== -->
 
-    <footer>
+<section class="tips">
 
-        <div class="container footer-content">
+    <div class="container">
 
-            <h3>
+        <div class="section-title">
 
-                Fraud SMS Classifier
+            <h2>
 
-            </h3>
+                🇳🇬 SMS Safety Tips for Nigerians
+
+            </h2>
 
             <p>
 
-                AI-powered SMS fraud detection system developed
-                using Machine Learning and Natural Language Processing.
-
-            </p>
-
-            <div class="footer-icons">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-                <i class="fa-solid fa-lock"></i>
-
-                <i class="fa-solid fa-brain"></i>
-
-                <i class="fa-solid fa-bolt"></i>
-
-            </div>
-
-            <p class="copyright">
-
-                © 2026 Fraud SMS Classifier.
-                All Rights Reserved.
+                Protect yourself against common SMS fraud techniques.
 
             </p>
 
         </div>
 
-    </footer>    <!-- ========================= -->
-    <!-- JavaScript -->
-    <!-- ========================= -->
+        <div class="feature-grid">
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+            <div class="feature-card">
+
+                <i class="fa-solid fa-link-slash"></i>
+
+                <h3>
+
+                    Avoid Unknown Links
+
+                </h3>
+
+                <p>
+
+                    Never click links from unexpected SMS messages,
+                    even if they appear to come from your bank.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                <h3>
+
+                    Verify With Your Bank
+
+                </h3>
+
+                <p>
+
+                    Always contact your bank using its official
+                    phone number before responding.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-user-secret"></i>
+
+                <h3>
+
+                    Protect Your Information
+
+                </h3>
+
+                <p>
+
+                    Never share your BVN, OTP,
+                    ATM PIN or password by SMS.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-phone-volume"></i>
+
+                <h3>
+
+                    Report Fraud
+
+                </h3>
+
+                <p>
+
+                    Report suspicious messages
+                    to your bank or the relevant authorities.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- Footer -->
+<!-- ===================================== -->
+
+<footer>
+
+    <div class="container footer-content">
+
+        <h3>
+
+            Naija SMS Shield
+
+        </h3>
+
+        <p>
+
+            AI-powered SMS fraud detection system developed to help
+            Nigerians identify phishing attacks, fake bank alerts,
+            lottery scams, POS scams and other fraudulent SMS messages.
+
+        </p>
+
+        <div class="footer-icons">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <i class="fa-solid fa-lock"></i>
+
+            <i class="fa-solid fa-brain"></i>
+
+            <i class="fa-solid fa-bolt"></i>
+
+            <i class="fa-solid fa-flag"></i>
+
+        </div>
+
+        <p>
+
+            <strong>Machine Learning Project</strong><br>
+
+            Developed by
+
+            <strong>Daniel Ogbodo</strong>
+
+        </p>
+
+        <p class="copyright">
+
+            © 2026 Naija SMS Shield.
+            All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- JavaScript -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 

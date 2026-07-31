@@ -533,4 +533,17 @@ if (pdfExportButton) {
     });
 
 }
+});// ========================================
+// Nigerian Sample Messages
+// ========================================
+
+document.querySelectorAll(".sample-btn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        document.getElementById("message").value =
+            this.dataset.message;
+
+    });
+
 });
