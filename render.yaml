@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: fraud-sms-classifier
+    runtime: python
+
+    buildCommand: |
+      pip install -r requirements.txt
+
+    startCommand: |
+      gunicorn app.app:app
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+
+      - key: SECRET_KEY
+        generateValue: true
+
+      - key: FLASK_DEBUG
+        value: "False"

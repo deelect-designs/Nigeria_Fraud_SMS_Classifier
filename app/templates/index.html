@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="AI-powered Fraud SMS Classifier using Machine Learning">
+
+    <meta name="keywords"
+          content="Spam Detection, SMS Classifier, AI, Machine Learning, Fraud Detection">
+
+    <meta name="author"
+          content="Daniel Ogbodo">
+
+    <title>Fraud SMS Classifier | AI Spam Detection</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- Navigation -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <div class="container nav-container">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>Fraud SMS Classifier</span>
+
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#analyze">Analyze</a>
+
+                <a href="#about">About</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- Hero Section -->
+    <!-- ========================= -->
+
+    <section class="hero"
+             id="home">
+
+        <div class="container hero-content">
+
+            <h1>
+                AI-Powered
+                <span>Fraud SMS Detection</span>
+            </h1>
+
+            <p>
+
+                Detect fraudulent SMS messages instantly using
+                Natural Language Processing (NLP) and
+                Machine Learning.
+
+            </p>
+
+            <div class="hero-badges">
+
+                <div class="badge">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    AI Detection
+
+                </div>
+
+                <div class="badge">
+
+                    <i class="fa-solid fa-shield"></i>
+
+                    Secure Analysis
+
+                </div>
+
+                <div class="badge">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    Instant Results
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- Analyzer -->
+    <!-- ========================= -->
+
+    <section class="analyzer"
+             id="analyze">
+
+        <div class="container">
+
+            <div class="card">
+
+                <h2>
+
+                    Analyze an SMS Message
+
+                </h2>
+
+                <p class="subtitle">
+
+                    Paste any SMS below and let the AI determine
+                    whether it is Safe or Spam.
+
+                </p>
+
+                <form id="smsForm">
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="8"
+                        maxlength="2000"
+                        placeholder="Example:
+
+Congratulations! Your ATM card has been selected to receive ₦500,000.
+
+Click the link below to claim your reward immediately."
+
+                        required></textarea>
+
+                    <div class="button-group">
+
+                        <button
+                            type="submit"
+                            class="predict-btn">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            Analyze SMS
+
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="clear-btn"
+                            id="clearBtn">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Clear
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <!-- Loading -->
+
+                <div
+                    id="loading"
+                    class="loading hidden">
+
+                    <div class="spinner"></div>
+
+                    <p>
+
+                        AI is analyzing your SMS...
+
+                    </p>
+
+                </div>                <!-- ========================= -->
+                <!-- Results Card -->
+                <!-- ========================= -->
+
+                <div id="resultCard" class="result-card hidden">
+
+                    <div class="result-header">
+
+                        <h2>Analysis Result</h2>
+
+                        <span id="predictionBadge"
+                              class="prediction-badge">
+                            Waiting...
+                        </span>
+
+                    </div>
+
+                    <div class="result-grid">
+
+                        <div class="result-box">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                            <h4>Confidence</h4>
+
+                            <h3 id="confidence">
+                                0%
+                            </h3>
+
+                        </div>
+
+                        <div class="result-box">
+
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+
+                            <h4>Spam Probability</h4>
+
+                            <h3 id="spamProbability">
+                                0%
+                            </h3>
+
+                        </div>
+
+                        <div class="result-box">
+
+                            <i class="fa-solid fa-shield-check"></i>
+
+                            <h4>Safe Probability</h4>
+
+                            <h3 id="hamProbability">
+                                0%
+                            </h3>
+
+                        </div>
+
+                        <div class="result-box">
+
+                            <i class="fa-solid fa-gauge-high"></i>
+
+                            <h4>Risk Level</h4>
+
+                            <h3 id="riskLevel">
+                                Low
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Progress Bars -->
+
+                    <div class="progress-section">
+
+                        <div class="progress-item">
+
+                            <label>
+
+                                Spam Score
+
+                                <span id="spamPercent">
+                                    0%
+                                </span>
+
+                            </label>
+
+                            <div class="progress">
+
+                                <div id="spamBar"
+                                     class="progress-fill spam-fill"
+                                     style="width:0%;">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="progress-item">
+
+                            <label>
+
+                                Safe Score
+
+                                <span id="hamPercent">
+                                    0%
+                                </span>
+
+                            </label>
+
+                            <div class="progress">
+
+                                <div id="hamBar"
+                                     class="progress-fill ham-fill"
+                                     style="width:0%;">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Keywords -->
+
+                    <div class="keywords-section">
+
+                        <h3>
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            Suspicious Keywords
+
+                        </h3>
+
+                        <div id="keywordsContainer"
+                             class="keywords-container">
+
+                            <span class="keyword">
+
+                                None Detected
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Original Message -->
+
+                    <div class="message-preview">
+
+                        <h3>
+
+                            <i class="fa-solid fa-envelope-open-text"></i>
+
+                            Message Preview
+
+                        </h3>
+
+                        <div id="originalMessage"
+                             class="preview-box">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>    <!-- ========================= -->
+    <!-- Features Section -->
+    <!-- ========================= -->
+
+    <section class="features" id="about">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Why Use This Classifier?</h2>
+
+                <p>
+                    Our AI model combines Natural Language Processing (NLP)
+                    and Machine Learning to identify fraudulent SMS messages
+                    with high accuracy.
+                </p>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <h3>AI Powered</h3>
+
+                    <p>
+                        Uses TF-IDF feature engineering and supervised
+                        machine learning to classify SMS messages.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <h3>Fraud Detection</h3>
+
+                    <p>
+                        Detects phishing attempts, fake bank alerts,
+                        lottery scams and other suspicious SMS messages.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-gauge-high"></i>
+
+                    <h3>Instant Analysis</h3>
+
+                    <p>
+                        Returns predictions, confidence scores,
+                        probabilities and risk levels in seconds.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-key"></i>
+
+                    <h3>Keyword Detection</h3>
+
+                    <p>
+                        Highlights suspicious words commonly found
+                        in fraudulent SMS messages.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- How It Works -->
+    <!-- ========================= -->
+
+    <section class="workflow">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>How It Works</h2>
+
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+
+                        1
+
+                    </div>
+
+                    <h3>Paste SMS</h3>
+
+                    <p>
+                        Paste any SMS message into the text box.
+                    </p>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+
+                        2
+
+                    </div>
+
+                    <h3>AI Processing</h3>
+
+                    <p>
+                        The text is cleaned, transformed using TF-IDF
+                        and analyzed by the trained machine learning model.
+                    </p>
+
+                </div>
+
+                <div class="step">
+
+                    <div class="step-number">
+
+                        3
+
+                    </div>
+
+                    <h3>Prediction</h3>
+
+                    <p>
+                        Receive a prediction with confidence score,
+                        spam probability, safe probability,
+                        risk level and detected keywords.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- Technology Stack -->
+    <!-- ========================= -->
+
+    <section class="tech-stack">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Technology Stack</h2>
+
+            </div>
+
+            <div class="tech-grid">
+
+                <div class="tech-card">
+
+                    <i class="fa-brands fa-python"></i>
+
+                    <span>Python</span>
+
+                </div>
+
+                <div class="tech-card">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <span>Scikit-learn</span>
+
+                </div>
+
+                <div class="tech-card">
+
+                    <i class="fa-solid fa-server"></i>
+
+                    <span>Flask</span>
+
+                </div>
+
+                <div class="tech-card">
+
+                    <i class="fa-brands fa-html5"></i>
+
+                    <span>HTML5</span>
+
+                </div>
+
+                <div class="tech-card">
+
+                    <i class="fa-brands fa-css3-alt"></i>
+
+                    <span>CSS3</span>
+
+                </div>
+
+                <div class="tech-card">
+
+                    <i class="fa-brands fa-js"></i>
+
+                    <span>JavaScript</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section><!-- ===================================== -->
+<!-- Analytics Dashboard -->
+<!-- ===================================== -->
+
+<section class="dashboard" id="dashboard">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Analytics Dashboard
+
+            </h2>
+
+            <p>
+
+                Live statistics generated from all analyzed SMS messages.
+
+            </p>
+
+        </div>
+
+
+        <!-- Statistics Cards -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-database"></i>
+
+                <h3 id="totalSMS">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Total Messages
+
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3 id="spamSMS">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Spam Messages
+
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-shield-check"></i>
+
+                <h3 id="safeSMS">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Safe Messages
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Prediction History -->
+
+        <div class="history-card">
+
+    <div class="history-header">
+
+        <h3>
+
+            Recent Predictions
+
+        </h3>
+
+        <div class="export-buttons">
+
+            <a
+                href="/export/csv"
+                class="export-btn csv-btn"
+            >
+
+                <i class="fa-solid fa-file-csv"></i>
+
+                Export CSV
+
+            </a>
+
+            <a
+                href="/export/pdf"
+                class="export-btn pdf-btn"
+            >
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                Export PDF
+
+            </a>
+
+        </div>
+
+    </div>
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Prediction</th>
+
+                            <th>Risk</th>
+
+                            <th>Confidence</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="historyTable">
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                No prediction history yet.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- ========================= -->
+    <!-- Footer -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <h3>
+
+                Fraud SMS Classifier
+
+            </h3>
+
+            <p>
+
+                AI-powered SMS fraud detection system developed
+                using Machine Learning and Natural Language Processing.
+
+            </p>
+
+            <div class="footer-icons">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <i class="fa-solid fa-lock"></i>
+
+                <i class="fa-solid fa-brain"></i>
+
+                <i class="fa-solid fa-bolt"></i>
+
+            </div>
+
+            <p class="copyright">
+
+                © 2026 Fraud SMS Classifier.
+                All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>    <!-- ========================= -->
+    <!-- JavaScript -->
+    <!-- ========================= -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
