@@ -1,9 +1,7 @@
 from pathlib import Path
-
 import joblib
 
 from .preprocessing import preprocess_text
-
 
 # ==========================================================
 # Load Model and Vectorizer
@@ -61,24 +59,98 @@ SUSPICIOUS_WORDS = {
 
 
 # ==========================================================
+# Nigerian Scam Indicators
+# ==========================================================
+
+NIGERIAN_SCAM_PATTERNS = [
+
+    "bvn",
+
+    "nin",
+
+    "gtbank",
+
+    "access bank",
+
+    "zenith bank",
+
+    "uba",
+
+    "first bank",
+
+    "fidelity bank",
+
+    "fcmb",
+
+    "sterling bank",
+
+    "opay",
+
+    "palmpay",
+
+    "moniepoint",
+
+    "kuda",
+
+    "wema",
+
+    "your account has been suspended",
+
+    "verify immediately",
+
+    "verify your account",
+
+    "reactivate",
+
+    "click the link",
+
+    "click below",
+
+    "refund immediately",
+
+    "mistakenly transferred",
+
+    "atm card",
+
+    "bank account",
+
+    "account restriction",
+
+    "your bvn",
+
+    "your account",
+
+    "otp",
+
+    "token"
+
+]
+
+
+# ==========================================================
 # Keyword Detection
 # ==========================================================
 
 def detect_keywords(message):
-    """
-    Detect suspicious keywords in the original message.
-    """
 
     words = message.lower().split()
 
     detected = sorted(
+
         list(
+
             {
+
                 word.strip(".,!?;:'\"()[]{}")
+
                 for word in words
+
                 if word.strip(".,!?;:'\"()[]{}") in SUSPICIOUS_WORDS
+
             }
+
         )
+
     )
 
     return detected
@@ -108,47 +180,78 @@ def calculate_risk(spam_probability):
 
 
 # ==========================================================
+# Nigerian Rule Engine
+# ==========================================================
+
+def detect_nigerian_scam(message):
+
+    text = message.lower()
+
+    score = 0
+
+    for phrase in NIGERIAN_SCAM_PATTERNS:
+
+        if phrase in text:
+
+            score += 1
+
+    return score
+
+
+# ==========================================================
 # Prediction Function
 # ==========================================================
 
 def predict_sms(message):
-    """
-    Predict whether an SMS is Spam or Safe.
-    Returns prediction, probabilities,
-    confidence score, risk level and keywords.
-    """
 
-    # Remove unnecessary whitespace
     message = message.strip()
 
-    # Preserve original message
     original_message = message
 
-    # Preprocess message
     cleaned_message = preprocess_text(message)
-    
-    # Convert to TF-IDF features
+
     vector = VECTORIZER.transform([cleaned_message])
 
-    # Prediction
     prediction = MODEL.predict(vector)[0]
 
-    # Real probabilities (CalibratedClassifierCV)
     probabilities = MODEL.predict_proba(vector)[0]
 
-    ham_probability = round(probabilities[0] * 100, 2)
+    ham_probability = float(round(probabilities[0] * 100, 2))
 
-    spam_probability = round(probabilities[1] * 100, 2)
+    spam_probability = float(round(probabilities[1] * 100, 2))
 
-    confidence = round(max(probabilities) * 100, 2)
+    confidence = float(round(max(probabilities) * 100, 2))
 
-    # Risk level
-    risk = calculate_risk(spam_probability)
+    # -------------------------------------------------------
+    # Nigerian Scam Detection Override
+    # -------------------------------------------------------
 
-    # Prediction label
+    scam_score = detect_nigerian_scam(original_message)
+
+    if scam_score >= 2:
+
+        prediction = 1
+
+        spam_probability = max(spam_probability, 96.50)
+
+        ham_probability = 100 - spam_probability
+
+        confidence = spam_probability
+
+    elif scam_score == 1 and spam_probability < 60:
+
+        spam_probability = 70.00
+
+        ham_probability = 30.00
+
+        confidence = 70.00
+
+        prediction = 1
+
     label = "Spam" if prediction == 1 else "Safe"
 
-    # Keywords
+    risk = calculate_risk(spam_probability)
+
     keywords = detect_keywords(original_message)
 
     return {
